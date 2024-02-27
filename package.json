@@ -37,6 +37,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "koa": "^2.15.0"
+    "koa": "^2.15.0",
+    "open": "^10.0.4"
   }
 }
