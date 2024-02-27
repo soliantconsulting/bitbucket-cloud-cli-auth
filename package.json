@@ -5,6 +5,9 @@
   "type": "module",
   "author": "Soliant Consulting",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist/**/*"
   ],
