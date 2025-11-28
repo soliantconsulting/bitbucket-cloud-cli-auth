@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.0.1...v1.1.0) (2025-11-28)
+
+
+### Features
+
+* replace koa with taxum ([154f128](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/commit/154f128cd5464a0787acaefb686775bc5daf6c54))
+
 ## [1.0.1](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.0.0...v1.0.1) (2025-10-23)
 
 
