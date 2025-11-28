@@ -1,52 +1,62 @@
-import Koa from "koa";
+import { rawQuery } from "@taxum/core/extract";
+import { htmlResponse, StatusCode } from "@taxum/core/http";
+import { createExtractHandler, m, Router } from "@taxum/core/routing";
+import { serve } from "@taxum/core/server";
 import open from "open";
 
 export const getAccessToken = async (clientId: string, port: number): Promise<string> => {
-    const app = new Koa();
+    let resolve: (accessToken: string) => void;
 
-    app.use(async (context, next) => {
-        if (context.path !== "/") {
-            return next();
-        }
-
-        context.status = 200;
-        context.set("Content-Type", "text/html; charset=utf-8");
-        context.body = `
-            <html>
-                <head>
-                    <script type="text/javascript">
-                        const params = new URLSearchParams(window.location.hash.substring(1));
-
-                        fetch("/token?accessToken=" + params.get("access_token")).then(() => {
-                            document.body.innerText = "You can now close this tab and return to the CLI.";
-                        });
-                    </script>
-                </head>
-                <body>
-                    Please wait…                    
-                </body>
-            </html>
-        `;
+    const accessTokenPromise = new Promise<string>((res) => {
+        resolve = res;
     });
 
-    const accessTokenPromise = new Promise<string>((resolve, reject) => {
-        app.use(async (context, next) => {
-            if (context.path !== "/token") {
-                return next();
-            }
+    const router = new Router();
 
-            if (typeof context.query.accessToken !== "string") {
-                reject(Error("Access token missing in query parameter"));
-                return;
-            }
+    router.route(
+        "/",
+        m.get(() =>
+            htmlResponse(`
+                <html>
+                    <head>
+                        <script type="text/javascript">
+                            const params = new URLSearchParams(window.location.hash.substring(1));
+    
+                            fetch("/token?accessToken=" + params.get("access_token")).then(() => {
+                                document.body.innerText = "You can now close this tab and return to the CLI.";
+                            });
+                        </script>
+                    </head>
+                    <body>
+                        Please wait…                    
+                    </body>
+                </html>
+            `),
+        ),
+    );
 
-            resolve(context.query.accessToken);
-            context.status = 204;
-        });
+    router.route(
+        "/token",
+        m.get(
+            createExtractHandler(rawQuery).handler((query) => {
+                const accessToken = query.get("accessToken");
+
+                if (accessToken) {
+                    resolve(accessToken);
+                }
+
+                return StatusCode.NO_CONTENT;
+            }),
+        ),
+    );
+
+    const abortController = new AbortController();
+
+    const serverPromise = serve(router, {
+        abortSignal: abortController.signal,
+        port,
+        unrefOnStart: true,
     });
-
-    const server = app.listen(port);
-    server.keepAliveTimeout = 100;
 
     try {
         await open(
@@ -54,8 +64,7 @@ export const getAccessToken = async (clientId: string, port: number): Promise<st
         );
         return await accessTokenPromise;
     } finally {
-        const closePromise = new Promise((resolve) => server.on("close", resolve));
-        server.close();
-        await closePromise;
+        abortController.abort();
+        await serverPromise;
     }
 };

@@ -28,21 +28,20 @@
   "scripts": {
     "build": "tsc",
     "format": "biome format . --write",
-    "check": "biome check . --apply"
+    "check": "biome check . --write"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@commitlint/cli": "^18.5.0",
-    "@commitlint/config-conventional": "^18.5.0",
-    "@tsconfig/node20": "^20.1.2",
-    "@types/koa": "^2.15.0",
-    "@types/node": "^20.11.5",
-    "lefthook": "^1.6.0",
-    "typescript": "^5.3.3"
+    "@biomejs/biome": "2.3.8",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@tsconfig/node24": "^24.0.3",
+    "@types/node": "^24.10.1",
+    "lefthook": "^2.0.4",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "koa": "^2.15.0",
-    "open": "^10.0.4"
+    "@taxum/core": "^1.0.4",
+    "open": "^11.0.0"
   },
   "packageManager": "pnpm@10.19.0+sha512.c9fc7236e92adf5c8af42fd5bf1612df99c2ceb62f27047032f4720b33f8eacdde311865e91c411f2774f618d82f320808ecb51718bfa82c060c4ba7c76a32b8"
 }

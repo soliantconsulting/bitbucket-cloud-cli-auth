@@ -1,44 +1,46 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.5.2/schema.json",
-    "organizeImports": {
-        "enabled": true
-    },
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "assist": { "actions": { "source": { "organizeImports": "on" } } },
     "files": {
-        "include": ["biome.json", "release.config.cjs", "commitlint.config.cjs", "src/**/*"]
+        "includes": ["biome.json", "commitlint.config.cjs", "src/**/*"]
     },
     "linter": {
         "enabled": true,
         "rules": {
             "recommended": true,
-            "nursery": {
-                "noEmptyTypeParameters": "error",
-                "noInvalidUseBeforeDeclaration": "error",
-                "noUnusedImports": "error",
-                "noUnusedPrivateClassMembers": "error",
-                "noUselessLoneBlockStatements": "error",
-                "noUselessTernary": "error",
-                "useExportType": "error",
-                "useImportType": "error",
-                "useForOf": "error",
-                "useGroupedTypeImport": "error"
-            },
             "complexity": {
                 "noExcessiveCognitiveComplexity": "warn",
                 "useSimplifiedLogicExpression": "error"
             },
             "correctness": {
-                "noNewSymbol": "error"
+                "noUnusedImports": "error",
+                "noUnusedPrivateClassMembers": "error",
+                "useHookAtTopLevel": "error",
+                "noInvalidBuiltinInstantiation": "error",
+                "noSwitchDeclarations": "error"
             },
             "style": {
                 "useBlockStatements": "error",
                 "useCollapsedElseIf": "error",
-                "useShorthandArrayType": "error",
+                "useForOf": "error",
+                "useFragmentSyntax": "error",
                 "useShorthandAssign": "error",
-                "useSingleCaseStatement": "error"
+                "noParameterAssign": "error",
+                "useAsConstAssertion": "error",
+                "useDefaultParameterLast": "error",
+                "useEnumInitializers": "error",
+                "useSelfClosingElements": "error",
+                "useSingleVarDeclarator": "error",
+                "noUnusedTemplateLiteral": "error",
+                "useNumberNamespace": "error",
+                "noInferrableTypes": "error",
+                "noUselessElse": "error",
+                "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } }
             },
             "suspicious": {
                 "noApproximativeNumericConstant": "warn",
-                "noConsoleLog": "error"
+                "noEmptyBlockStatements": "error",
+                "noConsole": "error"
             }
         }
     },
