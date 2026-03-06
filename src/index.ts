@@ -15,13 +15,7 @@ export const getAccessToken = async (clientId: string, port: number): Promise<st
     const codeChallenge = generateCodeChallenge(codeVerifier);
     const redirectUri = `http://localhost:${port}/`;
 
-    let resolve: (accessToken: string) => void;
-    let reject: (error: Error) => void;
-
-    const accessTokenPromise = new Promise<string>((res, rej) => {
-        resolve = res;
-        reject = rej;
-    });
+    const { promise: accessTokenPromise, resolve, reject } = Promise.withResolvers<string>();
 
     const router = new Router();
 
