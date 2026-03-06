@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.1.0...v1.2.0) (2026-03-06)
+
+
+### Features
+
+* migrate OAuth flow from implicit grant to Authorization Code + PKCE ([#1](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/issues/1)) ([9ba6dcc](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/commit/9ba6dcce4b7d71f418eb26dda8b0fe29155535f5))
+
 # [1.1.0](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.0.1...v1.1.0) (2025-11-28)
 
 
