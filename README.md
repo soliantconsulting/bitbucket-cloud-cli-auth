@@ -20,5 +20,5 @@ pnpm add @soliantconsulting/bitbucket-cloud-cli-auth
 ```typescript
 import { getAccessToken } from "@soliantconsulting/bitbucket-cloud-cli-auth";
 
-const accessToken = await getAccessToken(clientId, port);
+const accessToken = await getAccessToken(clientId, clientSecret, port);
 ```
