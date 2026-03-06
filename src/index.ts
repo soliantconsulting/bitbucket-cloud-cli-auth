@@ -82,9 +82,13 @@ export const getAccessToken = async (clientId: string, port: number): Promise<st
     });
 
     try {
-        await open(
-            `https://bitbucket.org/site/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
-        );
+        const authUrl = new URL("https://bitbucket.org/site/oauth2/authorize");
+        authUrl.searchParams.set("client_id", clientId);
+        authUrl.searchParams.set("response_type", "code");
+        authUrl.searchParams.set("redirect_uri", redirectUri);
+        authUrl.searchParams.set("code_challenge", codeChallenge);
+        authUrl.searchParams.set("code_challenge_method", "S256");
+        await open(authUrl.toString());
         return await accessTokenPromise;
     } finally {
         abortController.abort();
