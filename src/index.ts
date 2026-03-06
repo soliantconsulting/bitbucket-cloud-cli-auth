@@ -10,7 +10,11 @@ const generateCodeVerifier = (): string => randomBytes(32).toString("base64url")
 const generateCodeChallenge = (codeVerifier: string): string =>
     createHash("sha256").update(codeVerifier).digest("base64url");
 
-export const getAccessToken = async (clientId: string, clientSecret: string, port: number): Promise<string> => {
+export const getAccessToken = async (
+    clientId: string,
+    clientSecret: string,
+    port: number,
+): Promise<string> => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
     const redirectUri = `http://localhost:${port}/`;
