@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.2.0...v2.0.0) (2026-03-06)
+
+
+### Features
+
+* require clientSecret in getAccessToken ([#2](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/issues/2)) ([313e67e](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/commit/313e67e0c1753ff869a6497c87e75dbc7272e147))
+
+
+### BREAKING CHANGES
+
+* now requires to set client secret as there is no support for PKCE with only client ID.
+
 # [1.2.0](https://github.com/soliantconsulting/bitbucket-cloud-cli-auth/compare/v1.1.0...v1.2.0) (2026-03-06)
 
 
